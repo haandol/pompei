@@ -1,0 +1,23 @@
+doctype html
+html
+    head
+      meta(http-equiv="Content-Type", content="text/html; charset=UTF-8")
+
+      title.
+        Pompei Waiting Number Editor
+
+      link(type="text/css", rel="stylesheet", href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css")
+      link(type="text/css", rel="stylesheet/less", href="admin.less")
+
+      script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+      script(src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.1.0/less.min.js")
+      script(src="admin.js")
+
+    body
+      form(method="POST" action="/admin")
+        label(for="waiting-count").
+          대기번호를 입력하세요: 
+        input(type="text" name="count" value="#{count}")
+        br
+        input.btn.btn-success(type="submit" value="업데이트")
+        br
