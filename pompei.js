@@ -1,15 +1,17 @@
 var fs = require('fs');
 var express = require('express');
 var app = express();
+var path = require('path');
 var bodyParser = require('body-parser');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/static'));
 app.set('views', __dirname + '/templates');
 app.set('view engine', 'jade');
 
-var FILE_PATH = 'waiting.txt';
+var FILE_PATH = ['./', 'number.txt'].reduce(function(prev, cur, index, array) {
+  return path.join(prev, cur);
+});
 
 // Routes
 app.get('/', function(req, res) {
