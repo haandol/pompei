@@ -18,7 +18,7 @@ app.get('/', function(req, res) {
   fs.readFile(FILE_PATH, function(err, data) {
     if (err)
       console.log(err);
-    return res.send(data.toString());
+    return res.render('index', {count: data.toString()});
   });
 });
 
@@ -32,14 +32,14 @@ app.get('/admin', function(req, res) {
 
 app.post('/admin', function(req, res) {
   var data = req.body.count
-  if (data && !isNaN(parseInt(data))) {
-    fs.writeFile(FILE_PATH, data, function(err, data) {
-      if (err)
-        console.log(err);
-      return res.redirect('/admin');
-    });
-  } else
+  if (undefined === data)
     return res.send('숫자만 입력해주세요.');
+
+  fs.writeFile(FILE_PATH, data, function(err, data) {
+    if (err)
+      console.log(err);
+    return res.redirect('/admin');
+  });
 });
 
-app.listen(8000);
+app.listen(8080);
