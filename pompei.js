@@ -9,9 +9,11 @@ app.use(express.static(__dirname + '/static'));
 app.set('views', __dirname + '/templates');
 app.set('view engine', 'jade');
 
+var FILE_PATH = 'waiting.txt';
+
 // Routes
 app.get('/', function(req, res) {
-  fs.readFile('waiting.txt', function(err, data) {
+  fs.readFile(FILE_PATH, function(err, data) {
     if (err)
       console.log(err);
     return res.send(data.toString());
@@ -19,7 +21,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/admin', function(req, res) {
-  fs.readFile('waiting.txt', function(err, data) {
+  fs.readFile(FILE_PATH, function(err, data) {
     if (err)
       console.log(err);
     return res.render('admin', {count: data.toString()});
@@ -27,9 +29,9 @@ app.get('/admin', function(req, res) {
 });
 
 app.post('/admin', function(req, res) {
-  data = req.body.count
+  var data = req.body.count
   if (data && !isNaN(parseInt(data))) {
-    fs.writeFile('waiting.txt', data, function(err, data) {
+    fs.writeFile(FILE_PATH, data, function(err, data) {
       if (err)
         console.log(err);
       return res.redirect('/admin');
