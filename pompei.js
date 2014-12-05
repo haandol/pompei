@@ -18,7 +18,8 @@ app.get('/', function(req, res) {
   fs.readFile(FILE_PATH, function(err, data) {
     if (err)
       console.log(err);
-    return res.render('index', {count: data.toString()});
+    var size = (undefined === req.query.size) ? '2em' : req.query.size;
+    return res.render('index', {size: size, count: data.toString()});
   });
 });
 
