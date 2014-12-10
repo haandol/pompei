@@ -30,14 +30,6 @@ app.get('/pdp', function(req, res) {
   });
 });
 
-app.get('/atelier', function(req, res) {
-  fs.readFile(FILE_PATH, function(err, data) {
-    if (err)
-      console.log(err);
-    return res.render('atelier', {count: data.toString()});
-  });
-});
-
 app.get('/admin', function(req, res) {
   fs.readFile(FILE_PATH, function(err, data) {
     if (err)
